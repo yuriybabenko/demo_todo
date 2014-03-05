@@ -1,0 +1,228 @@
+/*----------------------------------------------------------------------------
+    $MIXINS & VARIABLES
+    $LAYOUT
+    $ELEMENTS
+    $FORMS
+    $GENERAL
+    $PARTIALS
+----------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------
+    $MIXINS & VARIABLES
+----------------------------------------------------------------------------*/
+
+@blue: #639ff2;
+@dark-blue: #0f4288;
+
+.transition(@duration) {
+  -o-transition: @duration;
+  -ms-transition: @duration;
+  -moz-transition: @duration;
+  -webkit-transition: @duration;
+  transition: @duration;
+}
+
+.proxima {
+  font-family: "proxima-nova", sans-serif;
+}
+
+/* This allows a 'true' 100% width on any element regardless of that elements' padding and/or borders. */
+.bb {
+  box-sizing: border-box; /* css3 rec */
+  -moz-box-sizing: border-box; /* ff2 */
+  -ms-box-sizing: border-box; /* ie8 */
+  -webkit-box-sizing: border-box; /* safari3 */
+  -khtml-box-sizing: border-box; /* konqueror */
+}
+
+.border-radius(@radius: 3px) {
+  .border-radius-2(@radius, @radius);
+}
+
+.border-radius-2(@radius_top, @radius_bottom) {
+  .border-radius-4(@radius_top, @radius_top, @radius_bottom, @radius_bottom);
+}
+
+.border-radius-4(@radius_top_left, @radius_top_right, @radius_bottom_right, @radius_bottom_left) {
+  -webkit-border-radius: @radius_top_left @radius_top_right @radius_bottom_right @radius_bottom_left;
+  -moz-border-radius: @radius_top_left @radius_top_right @radius_bottom_right @radius_bottom_left;
+  border-radius: @radius_top_left @radius_top_right @radius_bottom_right @radius_bottom_left;
+}
+
+
+/*----------------------------------------------------------------------------
+    $LAYOUT
+----------------------------------------------------------------------------*/
+
+html {
+  height: 100%;
+}
+
+body {
+  background: url('../img/stardust.png');
+  font-size: 1em;
+  margin: 0;
+}
+
+  #wrap {
+    margin: 10% auto;
+    width: 840px;
+  }
+
+    header {
+      .border-radius-2(10px, 0);
+
+      background: @blue;
+      border-bottom: 7px #fff solid;
+      height: 50px;
+    }
+
+    main { 
+      .border-radius-2(0, 10px);
+
+      background: url('../img/notebook_2x.png');
+
+      article {
+        background: url('../img/notebook_border.png') bottom repeat-x;
+        color: #444;
+        font-size: 1.3em;
+        height: 21px;
+        padding: 15px 20px;
+      }
+    }
+
+/*----------------------------------------------------------------------------
+    $ELEMENTS
+----------------------------------------------------------------------------*/
+
+#logo {
+  background: url('../img/logo.png') no-repeat;
+  display: inline-block;
+  height: 27px;
+  margin: 12px 0 0 20px;
+  width: 72px;
+}
+
+.messages {
+  .status,
+  .error {
+    .border-radius(5px);
+
+    padding: 10px;
+
+    li {
+      &:last-child {
+        margin: 0;
+      }
+
+      list-style: none;
+      margin: 0 0 5px 0;
+      padding: 0;
+    }
+  }
+
+  .status {
+    background: #79bd4c;
+  }
+
+  .error {
+    background: #ed7070;
+  }
+}
+
+/*----------------------------------------------------------------------------
+    $FORMS
+----------------------------------------------------------------------------*/
+
+.form-item {
+  margin: 0 0 10px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+input[type=text],
+input[type=password] {
+  .border-radius(2px);
+
+  border: 1px #ccc solid;
+  color: #444;
+  font-size: 1.2em;
+  padding: 5px 10px;
+  width: 278px;
+}
+
+input[type=button],
+input[type=submit] {
+  .border-radius(5px);
+
+  background: @blue;
+  color: #fff;
+  border: 0;
+  display: inline-block;
+  font-size: 1.2em;
+  margin: 0 10px 0 0;
+  padding: 10px 20px;
+
+  &:hover {
+    color: @dark-blue;
+    cursor: pointer;
+  }
+}
+
+/*----------------------------------------------------------------------------
+    $GENERAL
+----------------------------------------------------------------------------*/
+
+h1, h2, h3, h4 {
+  color: @dark-blue;
+  margin: 0 0 10px 0;
+}
+
+a {
+  color: @dark-blue;
+  text-decoration: none;
+
+  &:hover {
+    border-bottom: 1px solid @blue;
+  }
+}
+
+/*----------------------------------------------------------------------------
+    $PARTIALS
+----------------------------------------------------------------------------*/
+
+.partial {
+  overflow: auto;
+
+  &#partial-login {
+
+  }
+
+  .partial-popup {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 30px auto;
+    padding: 30px 30px;
+    width: 300px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

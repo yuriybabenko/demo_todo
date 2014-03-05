@@ -24,9 +24,14 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
-  'yuriy' => array('http://demo.todo'),
-));
+$env = $app->detectEnvironment(function () {
+  $yuriy_cli = (isset($_SERVER['PWD']) && $_SERVER['PWD'] == '/Volumes/Dev/www/demos/todo/app/laravel');
+  $yuriy_web = (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'demo.todo');
+
+  if ($yuriy_cli || $yuriy_web) {
+    return 'yuriy';
+  }
+});
 
 /*
 |--------------------------------------------------------------------------

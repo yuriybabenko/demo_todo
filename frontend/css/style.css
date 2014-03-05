@@ -1,0 +1,168 @@
+/*----------------------------------------------------------------------------
+    $MIXINS & VARIABLES
+    $LAYOUT
+    $ELEMENTS
+    $FORMS
+    $GENERAL
+    $PARTIALS
+----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------
+    $MIXINS & VARIABLES
+----------------------------------------------------------------------------*/
+.proxima {
+  font-family: "proxima-nova", sans-serif;
+}
+/* This allows a 'true' 100% width on any element regardless of that elements' padding and/or borders. */
+.bb {
+  box-sizing: border-box;
+  /* css3 rec */
+
+  -moz-box-sizing: border-box;
+  /* ff2 */
+
+  -ms-box-sizing: border-box;
+  /* ie8 */
+
+  -webkit-box-sizing: border-box;
+  /* safari3 */
+
+  -khtml-box-sizing: border-box;
+  /* konqueror */
+
+}
+/*----------------------------------------------------------------------------
+    $LAYOUT
+----------------------------------------------------------------------------*/
+html {
+  height: 100%;
+}
+body {
+  background: url('../img/stardust.png');
+  font-size: 1em;
+  margin: 0;
+}
+#wrap {
+  margin: 10% auto;
+  width: 840px;
+}
+header {
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+  background: #639ff2;
+  border-bottom: 7px #fff solid;
+  height: 50px;
+}
+main {
+  -webkit-border-radius: 0 0 10px 10px;
+  -moz-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+  background: url('../img/notebook_2x.png');
+}
+main article {
+  background: url('../img/notebook_border.png') bottom repeat-x;
+  color: #444;
+  font-size: 1.3em;
+  height: 21px;
+  padding: 15px 20px;
+}
+/*----------------------------------------------------------------------------
+    $ELEMENTS
+----------------------------------------------------------------------------*/
+#logo {
+  background: url('../img/logo.png') no-repeat;
+  display: inline-block;
+  height: 27px;
+  margin: 12px 0 0 20px;
+  width: 72px;
+}
+.messages .status,
+.messages .error {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  padding: 10px;
+}
+.messages .status li,
+.messages .error li {
+  list-style: none;
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+.messages .status li:last-child,
+.messages .error li:last-child {
+  margin: 0;
+}
+.messages .status {
+  background: #79bd4c;
+}
+.messages .error {
+  background: #ed7070;
+}
+/*----------------------------------------------------------------------------
+    $FORMS
+----------------------------------------------------------------------------*/
+.form-item {
+  margin: 0 0 10px 0;
+}
+.form-item:last-child {
+  margin-bottom: 0;
+}
+input[type=text],
+input[type=password] {
+  -webkit-border-radius: 2px 2px 2px 2px;
+  -moz-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
+  border: 1px #ccc solid;
+  color: #444;
+  font-size: 1.2em;
+  padding: 5px 10px;
+  width: 278px;
+}
+input[type=button],
+input[type=submit] {
+  -webkit-border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  background: #639ff2;
+  color: #fff;
+  border: 0;
+  display: inline-block;
+  font-size: 1.2em;
+  margin: 0 10px 0 0;
+  padding: 10px 20px;
+}
+input[type=button]:hover,
+input[type=submit]:hover {
+  color: #0f4288;
+  cursor: pointer;
+}
+/*----------------------------------------------------------------------------
+    $GENERAL
+----------------------------------------------------------------------------*/
+h1,
+h2,
+h3,
+h4 {
+  color: #0f4288;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #0f4288;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 1px solid #639ff2;
+}
+/*----------------------------------------------------------------------------
+    $PARTIALS
+----------------------------------------------------------------------------*/
+.partial {
+  overflow: auto;
+}
+.partial .partial-popup {
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 30px auto;
+  padding: 30px 30px;
+  width: 300px;
+}
