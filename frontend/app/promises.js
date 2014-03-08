@@ -16,7 +16,7 @@ var isAuth = function($q, $http, $rootScope, $location) {
 
     // user is authenticated
     if (data.auth === 1) {
-      $rootScope.user = data.email;
+      $rootScope.user_email = data.user_email;
       defered.resolve(true);
     }
     // user is anonymous

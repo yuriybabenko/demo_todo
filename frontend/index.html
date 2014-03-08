@@ -11,7 +11,10 @@
   <div id="wrap">
     <header>
       <a href="#" id="logo"></a>
-        {{ email }}
+      <div class="user-info" data-ng-show="user_email">
+        {{ user_email }}
+        | <a href="" data-ng-click="logout()">Logout</a>
+      </div>
     </header>
 
     <main>

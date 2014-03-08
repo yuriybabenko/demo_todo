@@ -52,6 +52,18 @@ header {
   background: #639ff2;
   border-bottom: 7px #fff solid;
   height: 50px;
+  position: relative;
+}
+header .user-info {
+  color: #333;
+  display: inline-block;
+  font-size: 1.2em;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+header .user-info a:hover {
+  color: #fff;
 }
 main {
   -webkit-border-radius: 0 0 10px 10px;
@@ -65,6 +77,28 @@ main article {
   font-size: 1.3em;
   height: 21px;
   padding: 15px 20px;
+  position: relative;
+}
+main article.new input[type=text] {
+  background: none;
+  border: 0;
+  color: #111;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  width: 400px;
+}
+main article.new input[type=submit] {
+  background: #75bc56;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 5px 20px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+main article.new input[type=submit]:hover {
+  color: #333;
 }
 main article:last-child {
   background: none;

@@ -1,11 +1,14 @@
 <div id="partial-user" class="partial">
-  <article>
-    <div class="item">
-      <a href="" data-ng-click="logout()">Logout {{ email }}</a>
-    </div>
-  </article>
-  <article>
-    <div class="item">Item 1</div>
+  <article class="new">
+    <input type="text" placeholder="new to-do item" />
+    -- calendar widget --
+    <select name="priority">
+      <option value="high">High</option>
+      <option value="normal" selected="selected">Normal</option>
+      <option value="low">Low</option>
+    </select>
+    <input type="submit" value="add item" />
+    <!-- <div class="item"></div> -->
   </article>
   <article>
     <div class="item">Item 1</div>

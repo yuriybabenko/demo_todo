@@ -55,7 +55,7 @@ class AuthController extends \BaseController {
 
     if (Auth::check()) {
       $api->setProperty('auth', 1);
-      $api->setProperty('email', Auth::user()->email);
+      $api->setProperty('user_email', Auth::user()->email);
     }
     else {
       $api->setProperty('auth', 0);
@@ -81,7 +81,7 @@ class AuthController extends \BaseController {
     // log the user out
     Auth::logout();
     Session::forget('user');
-    
+
     $api->setStatusMessage('You have been logged out.');
     return $api->getResponse();
   }

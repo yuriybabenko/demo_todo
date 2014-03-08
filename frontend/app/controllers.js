@@ -46,12 +46,12 @@ app.controller('LoginController', function ($scope, $rootScope, $http, $route, $
 });
 
 app.controller('UserController', function ($scope, $rootScope, $http, $location) {
-  $scope.email = $rootScope.user;
+  $scope.user_email = $rootScope.user_email;
 
   // logout action
-  $scope.logout = function() {
+  $rootScope.logout = function() {
     $http.get(api.url('auth/logout'), { }).success(function(data) {
-      $rootScope.user = null;
+      $rootScope.user_email = null;
       $location.path('/');
     });
   };

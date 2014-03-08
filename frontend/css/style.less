@@ -75,6 +75,22 @@ body {
       background: @blue;
       border-bottom: 7px #fff solid;
       height: 50px;
+      position: relative;
+
+      .user-info {
+        color: #333;
+        display: inline-block;
+        font-size: 1.2em;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+
+        a {
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
     }
 
     main { 
@@ -88,6 +104,33 @@ body {
         font-size: 1.3em;
         height: 21px;
         padding: 15px 20px;
+        position: relative;
+
+        &.new {
+          input[type=text] {
+            background: none;
+            border: 0;
+            color: #111;
+            font-size: 1em;
+            margin: 0;
+            padding: 0;
+            width: 400px;
+          }
+
+          input[type=submit] {
+            background: #75bc56;
+            font-size: 0.8em;
+            margin: 0;
+            padding: 5px 20px;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+
+            &:hover {
+              color: #333;
+            }
+          }
+        }
 
         &:last-child {
           background: none;
