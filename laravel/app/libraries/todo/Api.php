@@ -71,6 +71,8 @@ class Api {
    * @return [type] [description]
    */
   public function getResponse() {
+    $this->setProperty('request_time', (int) $_SERVER['REQUEST_TIME']);
+
     return \Response::json($this->_response);
   }
 }

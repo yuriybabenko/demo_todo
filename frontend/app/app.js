@@ -6,11 +6,24 @@ app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       controller: 'LoginController',
-      templateUrl: '/app/partials/login.html'
+      templateUrl: '/app/partials/login.html',
+      resolve: {
+        factory: isAnon
+      }
     })
     .when('/register', {
       controller: 'RegisterController',
-      templateUrl: '/app/partials/register.html'
+      templateUrl: '/app/partials/register.html',
+      resolve: {
+        factory: isAnon
+      }
+    })
+    .when('/user', {
+      controller: 'UserController',
+      templateUrl: '/app/partials/user.html',
+      resolve: {
+        factory: isAuth
+      }
     })
     .otherwise({
       redirectTo: '/'
@@ -25,7 +38,8 @@ var api = {
   path : '/ws/api/v1',
   // returns API URL for given stub
   url: function (stub) {
-    return this.path + '/' + stub;
+    // append random string to make sure the browser doesn't cache the call
+    return this.path + '/' + stub + '?' + Math.random().toString(36).replace(/[^a-z0-9]+/g, '');
   }
 };
 
@@ -37,11 +51,7 @@ var api = {
 app.init_form_data = function($http) {
   var form_data = {};
 
-  $http({
-    method: 'GET',
-    url: api.url('csrf-token')
-  })
-  .success(function(data) {
+  $http.get(api.url('csrf-token'), { }).success(function(data) {
     if (data.status == 'ok') {
       form_data._token = data.csrf_token;
     }

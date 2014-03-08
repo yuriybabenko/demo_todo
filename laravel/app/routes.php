@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function() {
-	return View::make('hello');
-});
-
 Route::group(array('prefix' => 'api/v1'), function() {
   Route::get('csrf-token', array(
     'uses' => 'AuthController@getCsrfToken',
@@ -23,6 +19,18 @@ Route::group(array('prefix' => 'api/v1'), function() {
   Route::post('auth', array(
     'uses' => 'AuthController@postAuth',
     'before' => 'csrf',
+  ));
+
+  Route::get('auth', array(
+    'uses' => 'AuthController@getAuth',
+  ));
+
+  Route::get('auth/logout', array(
+    'uses' => 'AuthController@getLogout',
+  ));
+
+  Route::get('user', array(
+    'uses' => 'UserController@getIndex',
   ));
 });
 

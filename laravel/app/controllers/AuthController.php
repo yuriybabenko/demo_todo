@@ -43,10 +43,46 @@ class AuthController extends \BaseController {
         return $api->getResponse();
       }
 
-      $api->setStatusMessage('Login successful.');
+    return $api->getResponse();
+  }
 
-      Session::put('email', $user['email']);
+  /**
+   * Checks whether the current user is authenticated and if so, provides the email.
+   * @return [type] [description]
+   */
+  public function getAuth() {
+    $api = new \todo\Api();
 
+    if (Auth::check()) {
+      $api->setProperty('auth', 1);
+      $api->setProperty('email', Auth::user()->email);
+    }
+    else {
+      $api->setProperty('auth', 0);
+    }
+
+    $api->setStatusMessage('session_id: ' . Session::getId());
+
+    return $api->getResponse();
+  }
+
+  /**
+   * Logs out current user.
+   * @return [type] [description]
+   */
+  public function getLogout() {
+    $api = new \todo\Api();
+
+    // $session_id = Session::getId();
+    // DB::table('sessions')->where('id', '=', $session_id)->delete();
+
+    $api->setStatusMessage('session_id: ' . Session::getId());
+
+    // log the user out
+    Auth::logout();
+    Session::forget('user');
+    
+    $api->setStatusMessage('You have been logged out.');
     return $api->getResponse();
   }
 
