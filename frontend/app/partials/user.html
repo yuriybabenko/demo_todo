@@ -1,4 +1,14 @@
 <div id="partial-user" class="partial">
+  <div class="messages" data-ng-show="messages">
+      <ul class="status" data-ng-show="messages.status">
+        <li data-ng-repeat="status in messages.status">{{ status }}</li>
+      </ul>
+
+      <ul class="error" data-ng-show="messages.error">
+        <li data-ng-repeat="error in messages.error">{{ error }}</li>
+      </ul>
+    </div>
+
   <article class="new">
     <form id="add-form" data-ng-submit="addItem()">
       <input 
@@ -27,28 +37,22 @@
           data-ng-model="new_item.priority"
         >
           <option value=""></option>
-          <option value="high">high</option>
-          <option value="normal">normal</option>
-          <option value="low">low</option>
+          <option value="2">high</option>
+          <option value="1">normal</option>
+          <option value="0">low</option>
         </select>
       </div>
 
       <input type="submit" value="add item" />
     </form>
   </article>
-  <article>
-    <div class="item">Item 1</div>
-  </article>
-  <article>
-    <div class="item">Item 1</div>
-  </article>
-  <article>
-    <div class="item">Item 1</div>
-  </article>
-  <article>
-    <div class="item">Item 1</div>
-  </article>
-  <article>
-    <div class="item">Item 1</div>
+
+  <article data-ng-repeat="item in items">
+    <form>
+      <input type="checkbox" id="completed-{{ item.id }}" title="test" data-ng-model="item.completed" />
+      <div class="title">{{ item.title }}</div>
+      <div class="date">{{ item.date }}</div>
+      <div class="priority">{{ item.priority }}</div>
+    </form>
   </article>
 </div> 

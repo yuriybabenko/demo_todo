@@ -19,6 +19,7 @@ class CreateItemsTable extends Migration {
       $t->string('title', 255);
       $t->integer('priority')->default(1);
       $t->timestamp('due_date')->nullable();
+      $t->boolean('completed')->default(0);
       $t->timestamps();
     });
 	}

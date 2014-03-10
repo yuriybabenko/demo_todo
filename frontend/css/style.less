@@ -245,6 +245,21 @@ body {
           }
         }
 
+        input[type=checkbox] {
+          display: inline-block;
+          margin: 0 10px 0 0;
+          position: relative;
+          top: -2px;
+        }
+
+        .title,
+        .date,
+        .priority {
+          display: inline-block;
+          margin-right: 20px;
+        }
+
+
         /* remove bottom border background on the last item */
         &:last-child {
           background: none;
@@ -371,12 +386,20 @@ a {
 
   }
 
+  &#partial-user {
+    .messages {
+      margin: 0 20px;
+    }
+  }
+
   .partial-popup {
     background-color: rgba(255, 255, 255, 0.5);
     margin: 30px auto;
     padding: 30px 30px;
     width: 300px;
   }
+
+
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-class User extends Eloquent {
+class Item extends Eloquent {
 
   public static $rules = array(
     'user_id' => 'required',

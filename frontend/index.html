@@ -23,7 +23,7 @@
         | <a href="" data-ng-click="logout()">Logout</a>
       </div>
     </header>
-
+    
     <main>
       <div data-ng-view></div>
     </main>
@@ -31,10 +31,14 @@
 
   <script type="text/javascript" src="js/angular.min.js"></script>
   <script type="text/javascript" src="js/angular-route.js"></script>
+  
   <script type="text/javascript" src="app/app.js"></script>
-  <script type="text/javascript" src="app/services.js"></script>
-  <script type="text/javascript" src="app/promises.js"></script>
-  <script type="text/javascript" src="app/controllers.js"></script>
-  <script type="text/javascript" src="app/userService.js"></script>
+
+  <script type="text/javascript" src="app/controllers/registerController.js"></script>
+  <script type="text/javascript" src="app/controllers/loginController.js"></script>
+  <script type="text/javascript" src="app/controllers/userController.js"></script>
+
+  <script type="text/javascript" src="app/services/authService.js"></script>
+  <script type="text/javascript" src="app/services/itemService.js"></script>
 </body>
 </html>

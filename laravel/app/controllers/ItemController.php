@@ -3,6 +3,39 @@
 class ItemController extends \BaseController {
 
   /**
+   * Callback for /item
+   * Return all items for current user.
+   * @return [type] [description]
+   */
+  public function getAll() {
+    $api = new \todo\Api();
+
+    $data = array();
+
+    $items = Item::where('user_id', '=', Auth::user()->id)->get();
+    foreach ($items as $item) {
+      $new_item = array(
+        'id' => $item->id,
+        'user_id' => Auth::user()->id,
+        'title' => htmlentities($item->title),
+        'priority' => $item->priority,
+        'date' => $item->due_date,
+        'completed' => $item->completed ? true : false,
+      );
+
+      // sanitize output
+      foreach ($new_item as &$value) {
+        $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+      }
+
+      $data[] = $new_item;
+    }
+
+    $api->setProperty('items', $data);
+    return $api->getResponse();
+  }
+
+  /**
    * Callback for /item/add. 
    * Adds new to-do item.
    * @return [type] [description]
@@ -10,25 +43,39 @@ class ItemController extends \BaseController {
   public function postAdd() {
     $api = new \todo\Api();
 
-    // perform form validation
-      $validator = Validator::make(Input::all(), User::$rules);
-      if ($validator->fails()) {
-        foreach ($validator->messages()->toArray() as $error) {
-          $api->setErrorMessage(array_shift($error));
-        }
+    // build Item object & save it
+      $item = new item;
+      $item->user_id = Auth::user()->id;
+      $item->title = Input::get('title');
+      $item->priority = Input::get('priority', 1);
+      $item->due_date = Input::get('date');
+      $item->completed = 0;
 
-        return $api->getResponse();
+    // sanity checks
+      // default to 'normal' priority
+      if (!in_array($item->priority, array(0, 1, 2))) {
+        $item->priority = 1; 
       }
 
-    // perform login authentication
-      $user = array(
-        'email' => Input::get('email'),
-        'password' => Input::get('password')
-      );
-          
-      if (!Auth::attempt($user)) {
-        $api->setErrorMessage('Login failed.');
-        return $api->getResponse();
+      // check date format
+      if ($item->due_date) {
+        // perform form validation
+        $validator = Validator::make(array('date' => $item->due_date), array('date' => 'date_format:"m/d/Y"'));
+        if ($validator->fails()) {
+          $api->setErrorMessage('Invalid date.');
+
+          return $api->getResponse();
+        }
+
+        // now format date for MySQL
+        $item->due_date = date('Y-m-d', strtotime($item->due_date));
+      }
+
+      if ($item->save()) {
+        $api->setStatusMessage('New to-do saved.');
+      }
+      else {
+        $api->setErrorMessage('An error occurred.');
       }
 
     return $api->getResponse();

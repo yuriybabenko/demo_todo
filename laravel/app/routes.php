@@ -36,6 +36,10 @@ Route::group(array('prefix' => 'api/v1'), function() {
   ));
 
   // item
+  Route::get('item', array(
+    'uses' => 'ItemController@getAll',
+  ));
+
   Route::post('item/add', array(
     'uses' => 'ItemController@postAdd',
     'before' => 'csrf',

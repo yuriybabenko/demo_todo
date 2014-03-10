@@ -371,6 +371,18 @@ main article.new input[type=submit] {
 main article.new input[type=submit]:hover {
   cursor: pointer;
 }
+main article input[type=checkbox] {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  position: relative;
+  top: -2px;
+}
+main article .title,
+main article .date,
+main article .priority {
+  display: inline-block;
+  margin-right: 20px;
+}
 main article:last-child {
   background: none;
 }
@@ -545,6 +557,9 @@ a:hover {
 ----------------------------------------------------------------------------*/
 .partial {
   overflow: auto;
+}
+.partial#partial-user .messages {
+  margin: 0 20px;
 }
 .partial .partial-popup {
   background-color: rgba(255, 255, 255, 0.5);
