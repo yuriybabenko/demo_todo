@@ -11,30 +11,16 @@
     $MIXINS & VARIABLES
 ----------------------------------------------------------------------------*/
 
+/* variables */
 @blue: #639ff2;
 @dark-blue: #0f4288;
 
-.transition(@duration) {
-  -o-transition: @duration;
-  -ms-transition: @duration;
-  -moz-transition: @duration;
-  -webkit-transition: @duration;
-  transition: @duration;
-}
-
+/* fonts */
 .proxima {
   font-family: "proxima-nova", sans-serif;
 }
 
-/* This allows a 'true' 100% width on any element regardless of that elements' padding and/or borders. */
-.bb {
-  box-sizing: border-box; /* css3 rec */
-  -moz-box-sizing: border-box; /* ff2 */
-  -ms-box-sizing: border-box; /* ie8 */
-  -webkit-box-sizing: border-box; /* safari3 */
-  -khtml-box-sizing: border-box; /* konqueror */
-}
-
+/* border radius */
 .border-radius(@radius: 3px) {
   .border-radius-2(@radius, @radius);
 }
@@ -49,6 +35,89 @@
   border-radius: @radius_top_left @radius_top_right @radius_bottom_right @radius_bottom_left;
 }
 
+/* This allows a 'true' 100% width on any element regardless of that elements' padding and/or borders. */
+.bb {
+  box-sizing: border-box; /* css3 rec */
+  -moz-box-sizing: border-box; /* ff2 */
+  -ms-box-sizing: border-box; /* ie8 */
+  -webkit-box-sizing: border-box; /* safari3 */
+  -khtml-box-sizing: border-box; /* konqueror */
+}
+
+/* box shadow */
+.box-shadow {
+  box-shadow: 0 0 3px #fff inset,0 1px 1px rgba(0, 0, 0, .1);
+}
+
+/* buttons */
+.button {
+  .border-radius(5px);
+  .box-shadow;
+
+  background-clip: padding-box;
+  border: 1px solid #aaa;
+  display: inline-block;
+  font-size: 0.8em;
+  line-height: 24px;
+  margin: 0;
+  overflow: hidden;
+  padding: 4px 10px 3px;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  zoom: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-large {
+  font-size: 1.2em;
+  padding: 7px 15px;
+}
+
+.button-gray {
+  .button;
+
+  background-color: #fff;
+  background: -webkit-linear-gradient(top, #fff 20%, #f6f6f6 50%, #eee 52%, #f4f4f4 100%);
+  color: #999;
+}
+
+.button-blue {
+  .button;
+
+  background: #7abcff; /* Old browsers */
+  background: -moz-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7abcff), color-stop(44%,#60abf8), color-stop(100%,#4096ee)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* W3C */
+  border-color: #0053c5;
+  color: #fff;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
+
+  &:hover {
+    color: #333;
+  }
+}
+
+.button-green {
+  .button;
+
+  background: #cdeb8e; /* Old browsers */
+  background: -moz-linear-gradient(top, #cdeb8e 0%, #a5c956 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cdeb8e), color-stop(100%,#a5c956)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #cdeb8e 0%,#a5c956 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #cdeb8e 0%,#a5c956 100%); /* W3C */
+  color: #075d00;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
+}
 
 /*----------------------------------------------------------------------------
     $LAYOUT
@@ -64,11 +133,13 @@ body {
   margin: 0;
 }
 
+  /* container wrap */
   #wrap {
     margin: 10% auto;
     width: 840px;
   }
 
+  /* header / blue bar */
     header {
       .border-radius-2(10px, 0);
 
@@ -77,6 +148,16 @@ body {
       height: 50px;
       position: relative;
 
+      /* logo */
+      #logo {
+        background: url('../img/logo.png') no-repeat;
+        display: inline-block;
+        height: 27px;
+        margin: 12px 0 0 20px;
+        width: 72px;
+      }
+
+      /* user info bar */
       .user-info {
         color: #333;
         display: inline-block;
@@ -85,6 +166,7 @@ body {
         right: 20px;
         top: 15px;
 
+        /* log out link */
         a {
           &:hover {
             color: #fff;
@@ -93,11 +175,13 @@ body {
       }
     }
 
+    /* main content wrap */
     main { 
       .border-radius-2(0, 10px);
 
       background: url('../img/notebook_2x.png');
 
+      /* individual to-do item */
       article {
         background: url('../img/notebook_border.png') bottom repeat-x;
         color: #444;
@@ -106,32 +190,62 @@ body {
         padding: 15px 20px;
         position: relative;
 
+        /* new item row */
         &.new {
-          input[type=text] {
-            background: none;
-            border: 0;
-            color: #111;
-            font-size: 1em;
-            margin: 0;
-            padding: 0;
-            width: 400px;
-          }
+          height: 39px;
+          padding-top: 9px;
+          padding-bottom: 5px;
 
-          input[type=submit] {
-            background: #75bc56;
+          /* input fields for item title and date */
+          input[type=text] {
+            .border-radius(5px);
+
             font-size: 0.8em;
             margin: 0;
-            padding: 5px 20px;
+
+            &.title {
+              &.error {
+                border-color: #c50000;
+              }
+
+              width: 400px;
+            }
+
+            &.date {
+              .button-gray;
+
+              margin-left: 15px;
+              width: 90px;
+            }
+          }
+
+          /* priority selector */
+          .select-wrap {
+            position: absolute;
+            right: 127px;
+            top: 9px;
+
+            .chosen-container {
+              font-size: 0.8em;
+              width: 120px !important;
+
+              .chosen-single {
+                padding: 4px 10px;
+              }
+            }
+          }
+
+          /* add item button */
+          input[type=submit] {
+            .button-green;
+
             position: absolute;
             right: 20px;
-            top: 10px;
-
-            &:hover {
-              color: #333;
-            }
+            top: 9px;
           }
         }
 
+        /* remove bottom border background on the last item */
         &:last-child {
           background: none;
         }
@@ -142,14 +256,7 @@ body {
     $ELEMENTS
 ----------------------------------------------------------------------------*/
 
-#logo {
-  background: url('../img/logo.png') no-repeat;
-  display: inline-block;
-  height: 27px;
-  margin: 12px 0 0 20px;
-  width: 72px;
-}
-
+/* status messages */
 .messages {
   .status,
   .error {
@@ -157,6 +264,7 @@ body {
 
     padding: 10px;
 
+    /* individual message line */
     li {
       &:last-child {
         margin: 0;
@@ -177,6 +285,18 @@ body {
   }
 }
 
+#ui-datepicker-div.ui-datepicker {
+  width: 12em;
+
+  a {
+    color: @blue;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
 /*----------------------------------------------------------------------------
     $FORMS
 ----------------------------------------------------------------------------*/
@@ -191,30 +311,34 @@ body {
 
 input[type=text],
 input[type=password] {
-  .border-radius(2px);
+  .border-radius(5px);
+  .box-shadow;
+  .proxima;
 
-  border: 1px #ccc solid;
+  border: 1px #aaa solid;
   color: #444;
   font-size: 1.2em;
   padding: 5px 10px;
+  text-overflow: ellipsis;
   width: 278px;
 }
 
 input[type=button],
 input[type=submit] {
-  .border-radius(5px);
+  .box-shadow;
+  .button-gray;
+  .button-large;
+  .proxima;
 
-  background: @blue;
-  color: #fff;
-  border: 0;
   display: inline-block;
-  font-size: 1.2em;
-  margin: 0 10px 0 0;
-  padding: 10px 20px;
+  margin-right: 10px;
 
   &:hover {
-    color: @dark-blue;
-    cursor: pointer;
+    .button-blue;
+    .button-large;
+
+    display: inline-block;
+    margin-right: 10px;
   }
 }
 

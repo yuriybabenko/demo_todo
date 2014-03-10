@@ -1,14 +1,40 @@
 <div id="partial-user" class="partial">
   <article class="new">
-    <input type="text" placeholder="new to-do item" />
-    -- calendar widget --
-    <select name="priority">
-      <option value="high">High</option>
-      <option value="normal" selected="selected">Normal</option>
-      <option value="low">Low</option>
-    </select>
-    <input type="submit" value="add item" />
-    <!-- <div class="item"></div> -->
+    <form id="add-form" data-ng-submit="addItem()">
+      <input 
+        type="text"
+        placeholder="new item"
+        name="title" 
+        class="title"
+        maxlength="255"
+        data-ng-class="{ 'error' : new_item.error_title }" 
+        data-ng-model="new_item.title"
+      />
+
+      <input 
+        type="text"
+        id="date-new" 
+        placeholder="due date" 
+        name="date" 
+        class="date" 
+        data-ng-model="new_item.date"
+      />
+
+      <div class="select-wrap">
+        <select
+          name="priority"
+          data-placeholder="priority"
+          data-ng-model="new_item.priority"
+        >
+          <option value=""></option>
+          <option value="high">high</option>
+          <option value="normal">normal</option>
+          <option value="low">low</option>
+        </select>
+      </div>
+
+      <input type="submit" value="add item" />
+    </form>
   </article>
   <article>
     <div class="item">Item 1</div>

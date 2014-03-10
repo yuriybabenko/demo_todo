@@ -45,13 +45,16 @@ var api = {
 
 /**
  * Returns a form_data object (with the CSRF token) for use in $scope.
- * @param  {[type]} $http [description]
+ * @param  {[type]} $authService [description]
  * @return {[type]}       [description]
  */
-app.init_form_data = function($http) {
+app.init_form_data = function (authService) {
+  return {};
+
   var form_data = {};
 
-  $http.get(api.url('csrf-token'), { }).success(function(data) {
+  var tokenPromise = authService.getCsrfToken();
+  tokenPromise.then(function (data) {
     if (data.status == 'ok') {
       form_data._token = data.csrf_token;
     }
