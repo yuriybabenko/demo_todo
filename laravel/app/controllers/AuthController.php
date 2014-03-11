@@ -14,6 +14,7 @@ class AuthController extends \BaseController {
     return $api->getResponse();
   }
 
+
   /**
    * Callback for /auth. 
    * Authenticates user.
@@ -47,6 +48,38 @@ class AuthController extends \BaseController {
   }
 
   /**
+   * Callback for /auth/register
+   * Creates new user.
+   * @return [type] [description]
+   */
+  public function postRegister() {
+    $api = new \todo\Api();
+
+    // perform form validation
+    $validator = Validator::make(Input::all(), array(
+      'email' => 'required|email|unique:users',
+      'password' => 'required|min:3|confirmed',
+    ));
+
+    if ($validator->fails()) {
+      foreach ($validator->messages()->toArray() as $error) {
+        $api->setErrorMessage(array_shift($error));
+      }
+
+      return $api->getResponse();
+    }
+
+    $user = new User();
+    $user->email = Input::get('email');
+    $user->password = Hash::make(Input::get('password'));
+    $user->save();
+
+    $api->setStatusMessage('Account created. You may now login.');
+
+    return $api->getResponse();
+  }
+
+  /**
    * Checks whether the current user is authenticated and if so, provides the email.
    * @return [type] [description]
    */
@@ -60,8 +93,6 @@ class AuthController extends \BaseController {
     else {
       $api->setProperty('auth', 0);
     }
-
-    $api->setStatusMessage('session_id: ' . Session::getId());
 
     return $api->getResponse();
   }

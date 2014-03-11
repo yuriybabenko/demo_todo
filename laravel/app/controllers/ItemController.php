@@ -4,15 +4,28 @@ class ItemController extends \BaseController {
 
   /**
    * Callback for /item
-   * Return all items for current user.
+   * Return all items for current user and performs sorting.
    * @return [type] [description]
    */
-  public function getAll() {
+  public function postAll() {
     $api = new \todo\Api();
 
     $data = array();
 
-    $items = Item::where('user_id', '=', Auth::user()->id)->get();
+    $query = Item::where('user_id', '=', Auth::user()->id);
+
+    // sort by due date
+    if ((int) Input::get('date', true)) {
+      $query->orderBy('due_date' , 'ASC');
+    }
+
+    // sort by priority
+    if ((int) Input::get('priority', true)) {
+      $query->orderBy('priority' , 'DESC');
+    }
+
+    $items = $query->get();
+
     foreach ($items as $item) {
       $new_item = array(
         'id' => $item->id,
@@ -57,7 +70,7 @@ class ItemController extends \BaseController {
 
     // sanity checks
       // default to 'normal' priority
-      if (!in_array($item->priority, array(0, 1, 2))) {
+      if (!is_numeric($item->priority) || !in_array($item->priority, array(0, 1, 2))) {
         $item->priority = 1; 
       }
 
@@ -74,13 +87,41 @@ class ItemController extends \BaseController {
         // now format date for MySQL
         $item->due_date = date('Y-m-d', strtotime($item->due_date));
       }
+      else {
+        $item->due_date = NULL;
+      }
 
       if ($item->save()) {
-        $api->setStatusMessage('New to-do saved.');
+        $api->setStatusMessage('Item "' . str_limit($item->title, 30, '...') . '" saved.');
       }
       else {
         $api->setErrorMessage('An error occurred.');
       }
+
+    return $api->getResponse();
+  }
+
+  /**
+   * Callback for /item/toggle. 
+   * Toggles item status.
+   * @return [type] [description]
+   */
+  public function postToggle() {
+    $api = new \todo\Api();
+
+    // count items which matches specified id and currently logged in user
+    $count = Item::where('id', '=', Input::get('id'))
+                  ->where('user_id', '=', Auth::user()->id)
+                  ->count();
+
+    if (!$count) {
+      $api->setErrorMessage('Item could not be updated.');
+      return $api->getResponse();
+    }
+
+    $item = Item::find(Input::get('id'));
+    $item->completed = $item->completed ? 0 : 1;
+    $item->save();
 
     return $api->getResponse();
   }

@@ -170,6 +170,25 @@ body {
         right: 20px;
         top: 15px;
 
+        .sorting {
+          display: inline-block;
+          font-size: 0.8em;
+          margin: 0 60px 0 0;
+
+          .text {
+            margin: 0 15px 0 0;
+          }
+
+          input[type=checkbox] {
+            position: relative;
+            top: -1px;
+          }
+
+          label {
+            margin: 0 10px 0 0;
+          }
+        }
+
         /* log out link */
         a {
           &:hover {
@@ -184,6 +203,7 @@ body {
       .border-radius-2(0, 10px);
 
       background: url('../img/notebook_2x.png');
+      min-height: 300px;
 
       /* individual to-do item */
       article {
@@ -437,6 +457,7 @@ a {
 ----------------------------------------------------------------------------*/
 
 .partial {
+  min-height: 300px;
   overflow: auto;
 
   &#partial-login {

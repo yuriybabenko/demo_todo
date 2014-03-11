@@ -19,6 +19,23 @@
     <header>
       <a href="#" id="logo"></a>
       <div class="user-info" data-ng-show="user_email">
+        <div class="sorting">
+          <span class="text">Sort by: </span>
+
+          <input  type="checkbox" 
+                  name="date" 
+                  data-ng-model="sorting.date"
+                  data-ng-change="refreshItems()" /> 
+
+          <label for="date">Date</label> 
+
+          <input  type="checkbox" 
+                  name="priority" 
+                  data-ng-model="sorting.priority"
+                  data-ng-change="refreshItems()" /> 
+
+          <label for="priority">Priority</label>
+        </div>
         {{ user_email }}
         | <a href="" data-ng-click="logout()">Logout</a>
       </div>

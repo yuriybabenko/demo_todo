@@ -237,6 +237,21 @@ header .user-info {
   /* log out link */
 
 }
+header .user-info .sorting {
+  display: inline-block;
+  font-size: 0.8em;
+  margin: 0 60px 0 0;
+}
+header .user-info .sorting .text {
+  margin: 0 15px 0 0;
+}
+header .user-info .sorting input[type=checkbox] {
+  position: relative;
+  top: -1px;
+}
+header .user-info .sorting label {
+  margin: 0 10px 0 0;
+}
 header .user-info a:hover {
   color: #fff;
 }
@@ -246,6 +261,7 @@ main {
   -moz-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
   background: url('../img/notebook_2x.png');
+  min-height: 300px;
   /* individual to-do item */
 
 }
@@ -606,6 +622,7 @@ a:hover {
     $PARTIALS
 ----------------------------------------------------------------------------*/
 .partial {
+  min-height: 300px;
   overflow: auto;
 }
 .partial#partial-user .messages {

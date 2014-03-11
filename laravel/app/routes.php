@@ -26,6 +26,10 @@ Route::group(array('prefix' => 'api/v1'), function() {
     'uses' => 'AuthController@getAuth',
   ));
 
+  Route::post('auth/register', array(
+    'uses' => 'AuthController@postRegister',
+  ));
+
   Route::get('auth/logout', array(
     'uses' => 'AuthController@getLogout',
   ));
@@ -36,8 +40,8 @@ Route::group(array('prefix' => 'api/v1'), function() {
   ));
 
   // item
-  Route::get('item', array(
-    'uses' => 'ItemController@getAll',
+  Route::post('item', array(
+    'uses' => 'ItemController@postAll',
   ));
 
   Route::post('item/add', array(
@@ -45,10 +49,16 @@ Route::group(array('prefix' => 'api/v1'), function() {
     'before' => 'csrf',
   ));
 
+  Route::post('item/toggle', array(
+    'uses' => 'ItemController@postToggle',
+    'before' => 'csrf',
+  ));
+
   Route::post('item/remove', array(
     'uses' => 'ItemController@postRemove',
     'before' => 'csrf',
   ));
+  
 });
 
 

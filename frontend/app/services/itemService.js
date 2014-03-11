@@ -3,11 +3,17 @@ app.factory('itemService', function ($http, authService) {
 
   /**
    * Returns promise for async get items request.
+   * @param  {[type]} form_data [description]
    * @return {[type]} [description]
    */
-  service.get = function () {
+  service.get = function (form_data) {
     // send request
-    return $http({method: 'GET', url: api.url('item')}).then(function (response) {
+    return $http({method: 'POST', url: api.url('item'), 
+      data: $.param(form_data),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then(function (response) {
       return response.data;
     });
   };
@@ -24,6 +30,32 @@ app.factory('itemService', function ($http, authService) {
 
       // send request
       return $http({method: 'POST', url: api.url('item/add'),
+        data: $.param(form_data),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then(function (response) {
+        return response.data;
+      });
+    });
+  };
+
+  /**
+   * Returns promise for async toggle item request.
+   * @param  {[type]} item_id   [description]
+   * @return {[type]}           [description]
+   */
+  service.toggle = function (item_id) {
+    // get CSRF token, send add request, return promise
+    return authService.getCsrfToken().then(function (csrf_request_data) {
+      var form_data = {
+        id: item_id,
+        _token: csrf_request_data.csrf_token
+      };
+
+      // send request
+      return $http({method: 'POST', url: api.url('item/toggle'),
         data: $.param(form_data),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'

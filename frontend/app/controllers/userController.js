@@ -1,13 +1,22 @@
 app.controller('UserController', function ($scope, $rootScope, $location, authService, itemService) {
   // prep data
+  $rootScope.sorting = {
+    date: true,
+    priority: true,
+  };
   $scope.items = [];
-
   $scope.new_item = {};
 
-  // helper to pull in & refresh list of items
-  var refreshItems = function () {
-    itemService.get().then(function (request_data) {
-      $scope.messages = request_data.messages;
+  // refresh items list action
+  $rootScope.refreshItems = function () {
+    // we need an object with int values instead of booleans, and we don't want
+    // to modify the original sorting object
+    var sorting = {
+      date: $rootScope.sorting.date ? 1 : 0,
+      priority: $rootScope.sorting.priority ? 1 : 0
+    };
+
+    itemService.get(sorting).then(function (request_data) {
       $scope.items = request_data.items;
 
       // convert priority values to strings, and completed flag to proper JS boolean
@@ -26,12 +35,15 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
       }
 
       // enable nice widgets
-      $('input[name=date').datepicker();
-      $('select').chosen({
+      $('article.new input[name=date]').datepicker();
+      $('article.new select').chosen({
         allow_single_deselect: true
       });
     });
   };
+
+  // pull in existing items
+  $rootScope.refreshItems();
 
   // helper to find index of given item id within items array 
   var findIndex = function (id) {
@@ -51,9 +63,6 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
     return false;
   };
 
-  // pull in existing items
-  refreshItems();
-
   // logout action
   $rootScope.logout = function () {
     authService.logout().then(function (request_data) {
@@ -62,7 +71,7 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
     });
   };
 
-  // addItem action
+  // add action
   $scope.addItem = function () {
     // ensure title has a value
     if (typeof $scope.new_item.title == 'undefined' || $scope.new_item.title === '') {
@@ -89,18 +98,26 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
           $('select').trigger('chosen:updated');
         }, 100);
 
-        refreshItems();
+        $rootScope.refreshItems();
       }
     });
   };
 
+  // toggle action
+  $scope.toggleItem = function (id) {
+    // send request
+    itemService.toggle(id).then(function (request_data) {
+      $scope.messages = request_data.messages;
+    });
+  };
+
   // edit action
-  $scope.edit = function (id) {
+  $scope.editItem = function (id) {
 
   };
 
   // remove action
-  $scope.remove = function (id) {
+  $scope.removeItem = function (id) {
     // send request
     itemService.remove(id).then(function (request_data) {
       $scope.messages = request_data.messages;
@@ -108,7 +125,7 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
       // find & remove the item which was deleted
       if (request_data.status == 'ok') {
         var index = findIndex(id);
-        if (index) {
+        if (index !== false) {
           $scope.items.splice(index, 1);
         }
       }
