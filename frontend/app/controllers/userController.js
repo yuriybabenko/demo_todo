@@ -6,6 +6,7 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
   };
   $scope.items = [];
   $scope.new_item = {};
+  $scope.priority_map = ['low', 'normal', 'high'];
 
   // refresh items list action
   $rootScope.refreshItems = function () {
@@ -20,14 +21,13 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
       $scope.items = request_data.items;
 
       // convert priority values to strings, and completed flag to proper JS boolean
-      var priority_map = ['low', 'normal', 'high'];
       for (var i = 0; i < $scope.items.length; i++) {
         // this flag will be used by the user.html partial to determine whether to
         // show the item in normal or editing state
         $scope.items[i].updating = false;
 
         if ($scope.items[i].priority !== false) {
-          $scope.items[i].priority = priority_map[$scope.items[i].priority];
+          $scope.items[i].priority = $scope.priority_map[$scope.items[i].priority];
         }
 
         if ($scope.items[i].completed) {
@@ -87,6 +87,17 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
   $scope.editItem = function (id) {
     var index = findIndex(id);
     if (index !== false) {
+      // convert priority to numeric value
+      for (var i = 0; i < $scope.priority_map.length; i++) {
+        if ($scope.priority_map[i] == $scope.items[index].priority) {
+          $scope.items[index].priority = i;
+        }
+      }
+
+      setTimeout(function () {
+        $('article .item-form select').trigger('chosen:updated');
+      }, 50);
+
       $scope.items[index].updating = true;
     }
   };

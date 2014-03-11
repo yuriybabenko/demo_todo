@@ -53,16 +53,11 @@ app.directive('itemForm', ['$compile', '$rootScope', 'itemService', function($co
 
       // update action
       scope.update = function () {
-        console.log(scope.item);
         itemService.fetch('item/update', scope.item).then(function (request_data) {
           scope.messages = request_data.messages;
 
           // clear fields
           if (request_data.status == 'ok') {
-            setTimeout(function () {
-              $('article.existing select').trigger('chosen:updated');
-            }, 100);
-
             $rootScope.refreshItems();
 
             scope.item.updating = false;
