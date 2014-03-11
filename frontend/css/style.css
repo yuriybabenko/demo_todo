@@ -261,7 +261,7 @@ main {
   -moz-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
   background: url('../img/notebook_2x.png');
-  min-height: 500px;
+  min-height: 300px;
   /* individual to-do item */
 
 }
@@ -627,7 +627,7 @@ a:hover {
     $PARTIALS
 ----------------------------------------------------------------------------*/
 .partial {
-  min-height: 500px;
+  min-height: 300px;
   overflow: auto;
 }
 .partial#partial-user .messages {

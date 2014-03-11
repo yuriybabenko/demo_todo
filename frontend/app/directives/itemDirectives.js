@@ -17,7 +17,7 @@ app.directive('itemForm', ['$compile', '$rootScope', 'itemService', function($co
           scope.error_title = true;
           return;
         }
-
+        
         // clear possible error highlight on the title field
         scope.error_title = false;
 
