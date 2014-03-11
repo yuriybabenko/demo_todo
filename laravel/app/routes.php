@@ -44,6 +44,11 @@ Route::group(array('prefix' => 'api/v1'), function() {
     'uses' => 'ItemController@postAdd',
     'before' => 'csrf',
   ));
+
+  Route::post('item/remove', array(
+    'uses' => 'ItemController@postRemove',
+    'before' => 'csrf',
+  ));
 });
 
 

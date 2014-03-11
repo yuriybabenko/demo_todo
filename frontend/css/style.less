@@ -117,6 +117,10 @@
   background: linear-gradient(to bottom, #cdeb8e 0%,#a5c956 100%); /* W3C */
   color: #075d00;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=0 ); /* IE6-9 */
+
+  &:hover {
+    color: #111;
+  }
 }
 
 /*----------------------------------------------------------------------------
@@ -185,7 +189,7 @@ body {
       article {
         background: url('../img/notebook_border.png') bottom repeat-x;
         color: #444;
-        font-size: 1.3em;
+        font-size: 1.1em;
         height: 21px;
         padding: 15px 20px;
         position: relative;
@@ -200,7 +204,7 @@ body {
           input[type=text] {
             .border-radius(5px);
 
-            font-size: 0.8em;
+            
             margin: 0;
 
             &.title {
@@ -208,7 +212,10 @@ body {
                 border-color: #c50000;
               }
 
-              width: 400px;
+              font-size: 0.85em;
+              padding-bottom: 6px;
+              padding-top: 6px;
+              width: 412px;
             }
 
             &.date {
@@ -222,11 +229,10 @@ body {
           /* priority selector */
           .select-wrap {
             position: absolute;
-            right: 127px;
+            right: 115px;
             top: 9px;
 
             .chosen-container {
-              font-size: 0.8em;
               width: 120px !important;
 
               .chosen-single {
@@ -249,16 +255,67 @@ body {
           display: inline-block;
           margin: 0 10px 0 0;
           position: relative;
-          top: -2px;
+          top: -6px;
         }
 
-        .title,
-        .date,
-        .priority {
+        .title {
           display: inline-block;
           margin-right: 20px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 404px;
         }
 
+        .date {
+          display: inline-block;
+          margin-right: 20px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 107px;
+        }
+
+        .priority {
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 135px;
+        }
+
+        .actions {
+          display: inline-block;
+          position: relative;
+
+          a {
+            display: inline-block;
+            height: 21px;
+            margin-right: 5px;
+            position: relative;
+            text-indent: -9999px;
+            top: -5px;
+            width: 20px;
+
+            &:hover {
+              border: 0;
+            }
+
+            &.edit {
+              background: url('../img/icons.png') 0 0 no-repeat;
+
+              &:hover {
+                background: url('../img/icons.png') 0 -22px no-repeat;
+              }
+            }
+
+            &.delete {
+              background: url('../img/icons.png') -20px 0 no-repeat;
+              width: 21px;
+
+              &:hover {
+                background: url('../img/icons.png') -20px -22px no-repeat;
+              }
+            }
+          }
+        }
 
         /* remove bottom border background on the last item */
         &:last-child {

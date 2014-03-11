@@ -49,10 +49,15 @@
 
   <article data-ng-repeat="item in items">
     <form>
-      <input type="checkbox" id="completed-{{ item.id }}" title="test" data-ng-model="item.completed" />
+      <input type="hidden" name="id" value="{{ item.id }}" />
+      <input type="checkbox" name="completed" data-ng-model="item.completed" />
       <div class="title">{{ item.title }}</div>
       <div class="date">{{ item.date }}</div>
       <div class="priority">{{ item.priority }}</div>
+      <div class="actions">
+        <a href="" class="edit" data-ng-click="edit(item.id)">edit</a>
+        <a href="" class="delete" data-ng-click="remove(item.id)">delete</a>
+      </div>
     </form>
   </article>
 </div> 

@@ -4,14 +4,26 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
 
   $scope.new_item = {};
 
-  // refreshItems action
-  $scope.refreshItems = function () {
+  // helper to pull in & refresh list of items
+  var refreshItems = function () {
     itemService.get().then(function (request_data) {
       $scope.messages = request_data.messages;
-
       $scope.items = request_data.items;
 
-      $('input[type=checkbox]').button();
+      // convert priority values to strings, and completed flag to proper JS boolean
+      var priority_map = ['low', 'normal', 'high'];
+      for (var i = 0; i < $scope.items.length; i++) {
+        if ($scope.items[i].priority !== false) {
+          $scope.items[i].priority = priority_map[$scope.items[i].priority];
+        }
+
+        if ($scope.items[i].completed) {
+          $scope.items[i].completed = true;
+        }
+        else {
+          $scope.items[i].completed = false;
+        }
+      }
 
       // enable nice widgets
       $('input[name=date').datepicker();
@@ -21,8 +33,26 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
     });
   };
 
+  // helper to find index of given item id within items array 
+  var findIndex = function (id) {
+    var found = false;
+
+    for (var i = 0; i < $scope.items.length; i++) {
+      if ($scope.items[i].id == id) {
+        found = true;
+        break;
+      }
+    }
+
+    if (found) {
+      return i;
+    }
+
+    return false;
+  };
+
   // pull in existing items
-  $scope.refreshItems();
+  refreshItems();
 
   // logout action
   $rootScope.logout = function () {
@@ -35,7 +65,7 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
   // addItem action
   $scope.addItem = function () {
     // ensure title has a value
-    if (typeof $scope.new_item.title == 'undefined' || $scope.new_item.title == '') {
+    if (typeof $scope.new_item.title == 'undefined' || $scope.new_item.title === '') {
       $scope.new_item.error_title = true;
       return;
     }
@@ -59,7 +89,28 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
           $('select').trigger('chosen:updated');
         }, 100);
 
-        $scope.refreshItems();
+        refreshItems();
+      }
+    });
+  };
+
+  // edit action
+  $scope.edit = function (id) {
+
+  };
+
+  // remove action
+  $scope.remove = function (id) {
+    // send request
+    itemService.remove(id).then(function (request_data) {
+      $scope.messages = request_data.messages;
+
+      // find & remove the item which was deleted
+      if (request_data.status == 'ok') {
+        var index = findIndex(id);
+        if (index) {
+          $scope.items.splice(index, 1);
+        }
       }
     });
   };

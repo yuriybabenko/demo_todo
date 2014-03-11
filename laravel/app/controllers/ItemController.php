@@ -23,6 +23,10 @@ class ItemController extends \BaseController {
         'completed' => $item->completed ? true : false,
       );
 
+      if (!is_null($new_item['date'])) {
+        $new_item['date'] = date('m/d/Y', strtotime($item->due_date));
+      }
+
       // sanitize output
       foreach ($new_item as &$value) {
         $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
@@ -77,6 +81,33 @@ class ItemController extends \BaseController {
       else {
         $api->setErrorMessage('An error occurred.');
       }
+
+    return $api->getResponse();
+  }
+
+  /**
+   * Callback for /item/remove. 
+   * Removes to-do item.
+   * @return [type] [description]
+   */
+  public function postRemove() {
+    $api = new \todo\Api();
+
+    // count items which matches specified id and currently logged in user
+    $count = Item::where('id', '=', Input::get('id'))
+                  ->where('user_id', '=', Auth::user()->id)
+                  ->count();
+
+    if (!$count) {
+      $api->setErrorMessage('Item could not be deleted.');
+      return $api->getResponse();
+    }
+
+    $item = Item::find(Input::get('id'));
+    $title = $item->title;
+    $item->delete();
+
+    $api->setStatusMessage('Item "' . str_limit($title, 30, '...') . '" deleted.');
 
     return $api->getResponse();
   }

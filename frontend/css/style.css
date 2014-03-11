@@ -187,6 +187,9 @@
 .button-green:hover {
   cursor: pointer;
 }
+.button-green:hover {
+  color: #111;
+}
 /*----------------------------------------------------------------------------
     $LAYOUT
 ----------------------------------------------------------------------------*/
@@ -249,7 +252,7 @@ main {
 main article {
   background: url('../img/notebook_border.png') bottom repeat-x;
   color: #444;
-  font-size: 1.3em;
+  font-size: 1.1em;
   height: 21px;
   padding: 15px 20px;
   position: relative;
@@ -273,11 +276,13 @@ main article.new input[type=text] {
   -webkit-border-radius: 5px 5px 5px 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  font-size: 0.8em;
   margin: 0;
 }
 main article.new input[type=text].title {
-  width: 400px;
+  font-size: 0.85em;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  width: 412px;
 }
 main article.new input[type=text].title.error {
   border-color: #c50000;
@@ -311,11 +316,10 @@ main article.new input[type=text].date:hover {
 }
 main article.new .select-wrap {
   position: absolute;
-  right: 127px;
+  right: 115px;
   top: 9px;
 }
 main article.new .select-wrap .chosen-container {
-  font-size: 0.8em;
   width: 120px !important;
 }
 main article.new .select-wrap .chosen-container .chosen-single {
@@ -371,17 +375,63 @@ main article.new input[type=submit] {
 main article.new input[type=submit]:hover {
   cursor: pointer;
 }
+main article.new input[type=submit]:hover {
+  color: #111;
+}
 main article input[type=checkbox] {
   display: inline-block;
   margin: 0 10px 0 0;
   position: relative;
-  top: -2px;
+  top: -6px;
 }
-main article .title,
-main article .date,
-main article .priority {
+main article .title {
   display: inline-block;
   margin-right: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 404px;
+}
+main article .date {
+  display: inline-block;
+  margin-right: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 107px;
+}
+main article .priority {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 135px;
+}
+main article .actions {
+  display: inline-block;
+  position: relative;
+}
+main article .actions a {
+  display: inline-block;
+  height: 21px;
+  margin-right: 5px;
+  position: relative;
+  text-indent: -9999px;
+  top: -5px;
+  width: 20px;
+}
+main article .actions a:hover {
+  border: 0;
+}
+main article .actions a.edit {
+  background: url('../img/icons.png') 0 0 no-repeat;
+}
+main article .actions a.edit:hover {
+  background: url('../img/icons.png') 0 -22px no-repeat;
+}
+main article .actions a.delete {
+  background: url('../img/icons.png') -20px 0 no-repeat;
+  width: 21px;
+}
+main article .actions a.delete:hover {
+  background: url('../img/icons.png') -20px -22px no-repeat;
 }
 main article:last-child {
   background: none;
