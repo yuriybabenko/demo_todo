@@ -16,12 +16,14 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
       priority: $rootScope.sorting.priority ? 1 : 0
     };
 
-    itemService.get(sorting).then(function (request_data) {
+    itemService.fetch('item', sorting).then(function (request_data) {
       $scope.items = request_data.items;
 
       // convert priority values to strings, and completed flag to proper JS boolean
       var priority_map = ['low', 'normal', 'high'];
       for (var i = 0; i < $scope.items.length; i++) {
+        $scope.items[i].updating = false;
+
         if ($scope.items[i].priority !== false) {
           $scope.items[i].priority = priority_map[$scope.items[i].priority];
         }
@@ -35,8 +37,8 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
       }
 
       // enable nice widgets
-      $('article.new input[name=date]').datepicker();
-      $('article.new select').chosen({
+      $('article .item-form input[name=date]').datepicker();
+      $('article .item-form select').chosen({
         allow_single_deselect: true
       });
     });
@@ -71,55 +73,26 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
     });
   };
 
-  // add action
-  $scope.addItem = function () {
-    // ensure title has a value
-    if (typeof $scope.new_item.title == 'undefined' || $scope.new_item.title === '') {
-      $scope.new_item.error_title = true;
-      return;
-    }
-
-    // clear possible error highlight on the title field
-    $scope.new_item.error_title = false;
-
-    // send request
-    itemService.add($scope.new_item).then(function (request_data) {
-      $scope.messages = request_data.messages;
-
-      // clear fields
-      if (request_data.status == 'ok') {
-        $scope.new_item.title = '';
-        $scope.new_item.date = '';
-        $scope.new_item.priority = '';
-
-        // trigger the Chosen event after a small timeout so the view has time to pick
-        // up on the binding change
-        setTimeout(function () {
-          $('select').trigger('chosen:updated');
-        }, 100);
-
-        $rootScope.refreshItems();
-      }
-    });
-  };
-
   // toggle action
   $scope.toggleItem = function (id) {
     // send request
-    itemService.toggle(id).then(function (request_data) {
+    itemService.fetch('item/toggle', { id: id }).then(function (request_data) {
       $scope.messages = request_data.messages;
     });
   };
 
   // edit action
   $scope.editItem = function (id) {
-
+    var index = findIndex(id);
+    if (index !== false) {
+      $scope.items[index].updating = true;
+    }
   };
 
   // remove action
   $scope.removeItem = function (id) {
     // send request
-    itemService.remove(id).then(function (request_data) {
+    itemService.fetch('item/remove', { id: id }).then(function (request_data) {
       $scope.messages = request_data.messages;
 
       // find & remove the item which was deleted

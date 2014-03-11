@@ -277,10 +277,15 @@ main article {
   /* remove bottom border background on the last item */
 
 }
-main article.new {
-  height: 39px;
-  padding-top: 9px;
-  padding-bottom: 5px;
+main article .item-form {
+  position: relative;
+  top: -7px;
+  /*height: 39px;*/
+
+  /*padding-top: 9px;*/
+
+  /*padding-bottom: 5px;*/
+
   /* input fields for item title and date */
 
   /* priority selector */
@@ -288,22 +293,22 @@ main article.new {
   /* add item button */
 
 }
-main article.new input[type=text] {
+main article .item-form input[type=text] {
   -webkit-border-radius: 5px 5px 5px 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 0;
 }
-main article.new input[type=text].title {
+main article .item-form input[type=text].title {
   font-size: 0.85em;
   padding-bottom: 6px;
   padding-top: 6px;
   width: 412px;
 }
-main article.new input[type=text].title.error {
+main article .item-form input[type=text].title.error {
   border-color: #c50000;
 }
-main article.new input[type=text].date {
+main article .item-form input[type=text].date {
   -webkit-border-radius: 5px 5px 5px 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
@@ -327,21 +332,21 @@ main article.new input[type=text].date {
   margin-left: 15px;
   width: 90px;
 }
-main article.new input[type=text].date:hover {
+main article .item-form input[type=text].date:hover {
   cursor: pointer;
 }
-main article.new .select-wrap {
+main article .item-form .select-wrap {
   position: absolute;
-  right: 115px;
-  top: 9px;
+  right: 95px;
+  top: 0;
 }
-main article.new .select-wrap .chosen-container {
+main article .item-form .select-wrap .chosen-container {
   width: 120px !important;
 }
-main article.new .select-wrap .chosen-container .chosen-single {
+main article .item-form .select-wrap .chosen-container .chosen-single {
   padding: 4px 10px;
 }
-main article.new input[type=submit] {
+main article .item-form input[type=submit] {
   -webkit-border-radius: 5px 5px 5px 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
@@ -385,13 +390,13 @@ main article.new input[type=submit] {
   /* IE6-9 */
 
   position: absolute;
-  right: 20px;
-  top: 9px;
+  right: 0px;
+  top: 0;
 }
-main article.new input[type=submit]:hover {
+main article .item-form input[type=submit]:hover {
   cursor: pointer;
 }
-main article.new input[type=submit]:hover {
+main article .item-form input[type=submit]:hover {
   color: #111;
 }
 main article input[type=checkbox] {

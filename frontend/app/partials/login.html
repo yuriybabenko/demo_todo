@@ -2,15 +2,7 @@
   <form id="login-form" class="partial-popup" data-ng-submit="process()">
     <h1>Login</h1>
 
-    <div class="messages" data-ng-show="messages">
-      <ul class="status" data-ng-show="messages.status">
-        <li data-ng-repeat="status in messages.status">{{ status }}</li>
-      </ul>
-
-      <ul class="error" data-ng-show="messages.error">
-        <li data-ng-repeat="error in messages.error">{{ error }}</li>
-      </ul>
-    </div>
+    <messages-list></messages-list>
 
     <div class="form-item">
       <input type="text" name="email" placeholder="email" data-ng-model="form_data.email" />

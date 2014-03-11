@@ -1,54 +1,14 @@
 <div id="partial-user" class="partial">
-  <div class="messages" data-ng-show="messages">
-      <ul class="status" data-ng-show="messages.status">
-        <li data-ng-repeat="status in messages.status">{{ status }}</li>
-      </ul>
-
-      <ul class="error" data-ng-show="messages.error">
-        <li data-ng-repeat="error in messages.error">{{ error }}</li>
-      </ul>
-    </div>
+  <messages-list></messages-list>
 
   <article class="new">
-    <form id="add-form" data-ng-submit="addItem()">
-      <input 
-        type="text"
-        placeholder="new item"
-        name="title" 
-        class="title"
-        maxlength="255"
-        data-ng-class="{ 'error' : new_item.error_title }" 
-        data-ng-model="new_item.title"
-      />
-
-      <input 
-        type="text"
-        id="date-new" 
-        placeholder="due date" 
-        name="date" 
-        class="date" 
-        data-ng-model="new_item.date"
-      />
-
-      <div class="select-wrap">
-        <select
-          name="priority"
-          data-placeholder="priority"
-          data-ng-model="new_item.priority"
-        >
-          <option value=""></option>
-          <option value="2">high</option>
-          <option value="1">normal</option>
-          <option value="0">low</option>
-        </select>
-      </div>
-
-      <input type="submit" value="add item" />
-    </form>
+    <div data-item-form=""></div>
   </article>
 
   <article data-ng-repeat="item in items">
-    <form>
+    <div data-item-form="" data-ng-show="item.updating"></div>
+
+    <form data-ng-hide="item.updating">
       <input type="hidden" name="id" value="{{ item.id }}" />
       <input type="checkbox" name="completed" data-ng-model="item.completed" data-ng-click="toggleItem(item.id)" />
       <div class="title">{{ item.title }}</div>

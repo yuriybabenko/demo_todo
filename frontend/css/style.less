@@ -215,10 +215,13 @@ body {
         position: relative;
 
         /* new item row */
-        &.new {
-          height: 39px;
-          padding-top: 9px;
-          padding-bottom: 5px;
+        .item-form {
+          position: relative;
+          top: -7px;
+
+          /*height: 39px;*/
+          /*padding-top: 9px;*/
+          /*padding-bottom: 5px;*/
 
           /* input fields for item title and date */
           input[type=text] {
@@ -249,8 +252,8 @@ body {
           /* priority selector */
           .select-wrap {
             position: absolute;
-            right: 115px;
-            top: 9px;
+            right: 95px;
+            top: 0;
 
             .chosen-container {
               width: 120px !important;
@@ -266,8 +269,8 @@ body {
             .button-green;
 
             position: absolute;
-            right: 20px;
-            top: 9px;
+            right: 0px;
+            top: 0;
           }
         }
 

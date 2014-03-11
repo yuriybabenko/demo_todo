@@ -1,0 +1,41 @@
+<form class="item-form" data-ng-submit="process()">
+  <input
+    type="hidden" 
+    name="id"
+    data-ng-model="item.id"
+  />
+
+  <input 
+    type="text"
+    placeholder="title"
+    name="title" 
+    class="title"
+    maxlength="255"
+    data-ng-class="{ 'error' : error_title }" 
+    data-ng-model="item.title"
+  />
+
+  <input 
+    type="text"
+    placeholder="due date" 
+    name="date-{{ item.id }}" 
+    class="date" 
+    data-ng-model="item.date"
+  />
+
+  <div class="select-wrap">
+    <select
+      name="priority"
+      data-placeholder="priority"
+      data-ng-model="item.priority"
+    >
+      <option value=""></option>
+      <option value="2">high</option>
+      <option value="1">normal</option>
+      <option value="0">low</option>
+    </select>
+  </div>
+
+  <input type="submit" value="add item" data-ng-hide="item.id" />
+  <input type="submit" value="save item" data-ng-show="item.id" />
+</form>
