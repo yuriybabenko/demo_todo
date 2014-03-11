@@ -17,7 +17,7 @@ Requirements
 Implementation
 =====
 
-The project is powered by AngularJS on the front-end, Laravel 4 on the back-end, and MySQL. The front- & back-ends are completely decoupled and interact entirely through the API.
+The project is powered by AngularJS on the front-end, and Laravel 4 & MySQL on the back-end. The front- & back-ends are completely decoupled and interact solely through the API.
 
 The AngularJS front-end is served from the site.com/ domain root, while the back-end is served from site.com/ws/ (web service).
 
@@ -58,7 +58,7 @@ Then configure the vhost with:
 
 In the above vhost configuration:
 
-- ensure `DocumentRoot`, `Directory` directives and the `alias` all have proper, absolute paths
+- ensure `DocumentRoot`, both `Directory` directives and the `alias` all have proper, absolute paths
 - ensure the `alias` (ie. `/ws`) matches the `RewriteBase` in Laravel's public/.htaccess
 
 Finally, update your system's `hosts` file to serve the domain specified in `ServerName`.
