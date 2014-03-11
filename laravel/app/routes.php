@@ -49,6 +49,11 @@ Route::group(array('prefix' => 'api/v1'), function() {
     'before' => 'csrf',
   ));
 
+  Route::post('item/update', array(
+    'uses' => 'ItemController@postUpdate',
+    'before' => 'csrf',
+  ));
+
   Route::post('item/toggle', array(
     'uses' => 'ItemController@postToggle',
     'before' => 'csrf',

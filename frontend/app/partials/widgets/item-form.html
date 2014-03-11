@@ -8,7 +8,7 @@
   <input 
     type="text"
     placeholder="title"
-    name="title" 
+    name="title-{{ item.id }}" 
     class="title"
     maxlength="255"
     data-ng-class="{ 'error' : error_title }" 
@@ -25,7 +25,7 @@
 
   <div class="select-wrap">
     <select
-      name="priority"
+      name="priority-{{ item.id }}"
       data-placeholder="priority"
       data-ng-model="item.priority"
     >

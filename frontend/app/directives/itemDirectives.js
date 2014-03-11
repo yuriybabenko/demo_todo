@@ -29,30 +29,6 @@ app.directive('itemForm', ['$compile', '$rootScope', 'itemService', function($co
         }
       };
 
-      // update action
-      scope.update = function () {
-        itemService.fetch('item/update', scope.item).then(function (request_data) {
-          scope.messages = request_data.messages;
-
-          // clear fields
-          if (request_data.status == 'ok') {
-            scope.item.title = '';
-            scope.item.date = '';
-            scope.item.priority = '';
-
-            // trigger the Chosen event after a small timeout so the view has time to pick
-            // up on the binding change
-            setTimeout(function () {
-              $('select').trigger('chosen:updated');
-            }, 100);
-
-            $rootScope.refreshItems();
-          }
-        });
-
-        scope.item.updating = false;
-      };
-
       // add action
       scope.add = function () {
         itemService.fetch('item/add', scope.item).then(function (request_data) {
@@ -67,10 +43,29 @@ app.directive('itemForm', ['$compile', '$rootScope', 'itemService', function($co
             // trigger the Chosen event after a small timeout so the view has time to pick
             // up on the binding change
             setTimeout(function () {
-              $('select').trigger('chosen:updated');
+              $('article.new select').trigger('chosen:updated');
             }, 100);
 
             $rootScope.refreshItems();
+          }
+        });
+      };
+
+      // update action
+      scope.update = function () {
+        console.log(scope.item);
+        itemService.fetch('item/update', scope.item).then(function (request_data) {
+          scope.messages = request_data.messages;
+
+          // clear fields
+          if (request_data.status == 'ok') {
+            setTimeout(function () {
+              $('article.existing select').trigger('chosen:updated');
+            }, 100);
+
+            $rootScope.refreshItems();
+
+            scope.item.updating = false;
           }
         });
       };

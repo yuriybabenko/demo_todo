@@ -22,6 +22,8 @@ app.controller('UserController', function ($scope, $rootScope, $location, authSe
       // convert priority values to strings, and completed flag to proper JS boolean
       var priority_map = ['low', 'normal', 'high'];
       for (var i = 0; i < $scope.items.length; i++) {
+        // this flag will be used by the user.html partial to determine whether to
+        // show the item in normal or editing state
         $scope.items[i].updating = false;
 
         if ($scope.items[i].priority !== false) {
