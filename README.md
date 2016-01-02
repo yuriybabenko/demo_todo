@@ -30,6 +30,7 @@ Import the database, and configure the Laravel application as you would normally
 - update bootstrap/start.php to detect your environment
 - update app/config/app.php and app/config/database.php as necessary
 - ensure public/.htaccess contains `RewriteBase /ws` after `RewriteEngine On`
+- execute `composer update` on laravel folder
 
 Then configure the vhost with:
 
